@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">treasure</string>
+    <string name="api_error">网络异常，请稍后重试</string>
+
+    <string name="pd_loading">请稍后&#8230;</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pull_to_refresh_refreshing_label" translatable="false">@string/pd_loading</string>
+    <string name="pull_to_refresh_load_label" translatable="false">上拉加载更多</string>
+
+    <string name="pull_to_refresh_net_error_label">网络异常，上拉重试</string>
+    <string name="pull_to_refresh_no_data_label">暂无数据</string>
+
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
+    <string name="today">今天</string>
+    <string name="day">日</string>
+    <string name="year">年</string>
+    <string name="yesterday">昨天</string>
+    <string name="the_day_before_yesterday">前天</string>
+    <string name="morning">上午 %s</string>
+    <string name="noon">中午 %s</string>
+    <string name="afternoon">下午 %s</string>
+    <string name="evening">晚上 %s</string>
+
+</resources>
