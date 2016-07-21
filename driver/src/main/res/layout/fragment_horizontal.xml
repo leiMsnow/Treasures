@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.droid.treasures.widget.ViewPagerIndicator
+    <com.droid.treasures.widget.HorizontalIndicatorView
         android:id="@+id/vp_indicator"
         android:layout_width="match_parent"
         android:layout_height="40dp"

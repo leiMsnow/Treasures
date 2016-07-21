@@ -18,7 +18,7 @@ public class ShowActivity extends AppCompatActivity {
 
             Fragment fragment = (Fragment) Class.forName(getIntent().getStringExtra("fragment")).newInstance();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fl_container, fragment)
+                    .replace(R.id.fl_container, fragment)
                     .commit();
 
         } catch (Exception e) {

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.droid.ray.driver.R;
 import com.droid.ray.driver.adapter.ViewPagerAdapter;
-import com.droid.treasures.widget.ViewPagerIndicator;
+import com.droid.treasures.widget.HorizontalIndicatorView;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class HorizontalFragment extends Fragment {
 
 
     private ViewPager mViewPager;
-    private ViewPagerIndicator mIndicator;
+    private HorizontalIndicatorView mIndicator;
     private ViewPagerAdapter mPagerAdapter;
 
     private static String[] mTitles = new String[]{
@@ -47,7 +47,7 @@ public class HorizontalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mViewPager = (ViewPager) view.findViewById(R.id.vp_container);
-        mIndicator = (ViewPagerIndicator) view.findViewById(R.id.vp_indicator);
+        mIndicator = (HorizontalIndicatorView) view.findViewById(R.id.vp_indicator);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         for (String title : mTitles) {
