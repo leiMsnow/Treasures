@@ -21,7 +21,7 @@ import com.droid.treasures.utils.DensityUtils;
  * ViewPager滑动指示器
  * Created by zhangleilei on 7/19/16.
  */
-public class ViewPagerIndicator extends HorizontalScrollView {
+public class HorizontalIndicatorView extends HorizontalScrollView {
 
     private Context mContext;
     private LinearLayout mContainer;
@@ -40,24 +40,23 @@ public class ViewPagerIndicator extends HorizontalScrollView {
     private int mIndicatorDefaultColor = Color.DKGRAY;
     private boolean isMeasure = false;
 
-    public ViewPagerIndicator(Context context) {
+    public HorizontalIndicatorView(Context context) {
         this(context, null);
     }
 
-    public ViewPagerIndicator(Context context, AttributeSet attrs) {
+    public HorizontalIndicatorView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ViewPagerIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HorizontalIndicatorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         mLinePaint = new Paint();
         mScreenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerIndicator);
-        isEquallyItem = typedArray.getBoolean(R.styleable.ViewPagerIndicator_equally_item, false);
-        mIndicatorColor = typedArray.getColor(R.styleable.ViewPagerIndicator_indicator_color, Color.RED);
-
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HorizontalIndicatorView);
+        isEquallyItem = typedArray.getBoolean(R.styleable.HorizontalIndicatorView_equally_item, false);
+        mIndicatorColor = typedArray.getColor(R.styleable.HorizontalIndicatorView_indicator_color, Color.RED);
         typedArray.recycle();
 
         initView();
@@ -73,7 +72,6 @@ public class ViewPagerIndicator extends HorizontalScrollView {
         LayoutParams layoutParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         mContainer.setLayoutParams(layoutParams);
-
         addView(mContainer);
     }
 
@@ -127,13 +125,14 @@ public class ViewPagerIndicator extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
-            setSelectedChild(position);
+
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 scrollToChild(mViewPager.getCurrentItem(), 0);
+                setSelectedChild(mCurrentPosition);
             }
         }
     }
@@ -188,7 +187,6 @@ public class ViewPagerIndicator extends HorizontalScrollView {
         }
 
         if (childWidthCount <= mScreenWidth) {
-
             LinearLayout.LayoutParams layoutParams =
                     new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
             for (int i = 0; i < mItemCount; i++) {
@@ -218,6 +216,7 @@ public class ViewPagerIndicator extends HorizontalScrollView {
             drawTextColor(currentChild, mIndicatorColor, mIndicatorDefaultColor);
             drawTextColor(nextChild, mIndicatorDefaultColor, mIndicatorColor);
         }
+
 
         mLinePaint.setColor(Color.LTGRAY);
         canvas.drawRect(mContainer.getLeft(), lineTop, mContainer.getWidth(), lineBottom, mLinePaint);
