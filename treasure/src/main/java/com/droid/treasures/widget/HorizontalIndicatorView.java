@@ -23,7 +23,6 @@ import com.droid.treasures.utils.DensityUtils;
  */
 public class HorizontalIndicatorView extends HorizontalScrollView {
 
-    private Context mContext;
     private LinearLayout mContainer;
     private ViewPager mViewPager;
 
@@ -50,9 +49,8 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
 
     public HorizontalIndicatorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
         mLinePaint = new Paint();
-        mScreenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
+        mScreenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HorizontalIndicatorView);
         isEquallyItem = typedArray.getBoolean(R.styleable.HorizontalIndicatorView_equally_item, false);
@@ -67,7 +65,7 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
 
         setFillViewport(true);
 
-        mContainer = new LinearLayout(mContext);
+        mContainer = new LinearLayout(getContext());
         mContainer.setOrientation(LinearLayout.HORIZONTAL);
         LayoutParams layoutParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -93,9 +91,9 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
 
     private void addTextView(final int position, String title) {
 
-        mItemPadding = DensityUtils.dp2px(mContext, 8);
+        mItemPadding = DensityUtils.dp2px(getContext(), 8);
 
-        TextView textView = new TextView(mContext);
+        TextView textView = new TextView(getContext());
         textView.setText(title);
         textView.setTextSize(14);
         textView.setTextColor(mIndicatorDefaultColor);
@@ -200,7 +198,7 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int lineHeight = DensityUtils.dp2px(mContext, 2);
+        int lineHeight = DensityUtils.dp2px(getContext(), 2);
         TextView currentChild = (TextView) mContainer.getChildAt(mCurrentPosition);
 
         float lineBottom = getHeight();
@@ -221,8 +219,8 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
         mLinePaint.setColor(Color.LTGRAY);
         canvas.drawRect(mContainer.getLeft(), lineTop, mContainer.getWidth(), lineBottom, mLinePaint);
 
-        int splitMargin = DensityUtils.dp2px(mContext, 12);
-        int splitWidth = DensityUtils.dp2px(mContext, 1);
+        int splitMargin = DensityUtils.dp2px(getContext(), 12);
+        int splitWidth = DensityUtils.dp2px(getContext(), 1);
         int splitTop = getTop() + splitMargin;
         int splitBottom = getBottom() - splitMargin;
         for (int i = 0; i < mItemCount; i++) {

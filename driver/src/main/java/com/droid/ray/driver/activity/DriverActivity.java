@@ -11,6 +11,7 @@ import android.view.View;
 import com.droid.ray.driver.R;
 import com.droid.ray.driver.adapter.DriverAdapter;
 import com.droid.ray.driver.fragment.HorizontalFragment;
+import com.droid.ray.driver.fragment.VerticalFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class DriverActivity extends AppCompatActivity {
     private void addTestData() {
         mList = new ArrayList<>();
         mList.add(HorizontalFragment.class.getName());
+        mList.add(VerticalFragment.class.getName());
     }
 
     private void initAdapter() {
@@ -55,8 +57,8 @@ public class DriverActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.rl_item:
-                    Intent intent = new Intent(mContext,ShowActivity.class);
-                    intent.putExtra("fragment",v.getTag().toString());
+                    Intent intent = new Intent(mContext, ShowActivity.class);
+                    intent.putExtra("fragment", v.getTag().toString());
                     startActivity(intent);
                     break;
             }

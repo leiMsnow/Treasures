@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.droid.treasures.widget.VerticalIndicatorView
+        android:id="@+id/viv_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="96dp"/>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#F0F0F0"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/viv_indicator"/>
+
+</RelativeLayout>

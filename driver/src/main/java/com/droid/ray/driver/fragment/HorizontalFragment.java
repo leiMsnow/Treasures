@@ -25,15 +25,7 @@ public class HorizontalFragment extends Fragment {
     private HorizontalIndicatorView mIndicator;
     private ViewPagerAdapter mPagerAdapter;
 
-    private static String[] mTitles = new String[]{
-            "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他"
-    };
-
-
-    public HorizontalFragment() {
-        // Required empty public constructor
-    }
-
+    private  String[] mTitles ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +40,8 @@ public class HorizontalFragment extends Fragment {
 
         mViewPager = (ViewPager) view.findViewById(R.id.vp_container);
         mIndicator = (HorizontalIndicatorView) view.findViewById(R.id.vp_indicator);
+
+        mTitles = getArguments().getStringArray("titles");
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         for (String title : mTitles) {

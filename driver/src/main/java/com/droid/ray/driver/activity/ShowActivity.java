@@ -9,6 +9,13 @@ import com.droid.ray.driver.R;
 public class ShowActivity extends AppCompatActivity {
 
 
+    private static String[] mTitles = new String[]{
+            "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
+            "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
+            "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
+            "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +23,11 @@ public class ShowActivity extends AppCompatActivity {
 
         try {
 
-            Fragment fragment = (Fragment) Class.forName(getIntent().getStringExtra("fragment")).newInstance();
+            Bundle bundle = new Bundle();
+            bundle.putStringArray("titles", mTitles);
+            Fragment fragment = (Fragment) Class.forName(getIntent()
+                    .getStringExtra("fragment")).newInstance();
+            fragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fl_container, fragment)
                     .commit();
