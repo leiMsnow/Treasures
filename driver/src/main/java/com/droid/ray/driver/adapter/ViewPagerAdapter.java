@@ -1,8 +1,10 @@
-package com.droid.ray.driver;
+package com.droid.ray.driver.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.droid.ray.driver.fragment.ItemFragment;
 
 import java.util.ArrayList;
 
