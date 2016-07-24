@@ -22,7 +22,6 @@ import java.util.List;
 public class VerticalIndicatorView extends ScrollView {
 
     private Scroller mScroller;
-
     private LinearLayout mContainer;
 
     private int mDefaultTextColor = Color.DKGRAY;
@@ -106,19 +105,18 @@ public class VerticalIndicatorView extends ScrollView {
             scrollY -= mScreenHeight / 3;
         }
         if (scrollY != mLastScrollY) {
-            smoothScrollToSlow(0, scrollY, 300);
+            smoothScrollToSlow(scrollY, 300);
             mLastScrollY = scrollY;
         }
     }
 
-    public void smoothScrollToSlow(int fx, int fy, int duration) {
-        int dx = fx - getScrollX();
+    public void smoothScrollToSlow(int fy, int duration) {
         int dy = fy - getScrollY();
-        smoothScrollBySlow(dx, dy, duration);
+        smoothScrollBySlow( dy, duration);
     }
 
-    public void smoothScrollBySlow(int dx, int dy, int duration) {
-        mScroller.startScroll(getScrollX(), getScrollY(), dx, dy, duration);
+    public void smoothScrollBySlow(int dy, int duration) {
+        mScroller.startScroll(getScrollX(), getScrollY(), 0, dy, duration);
         invalidate();
     }
 
