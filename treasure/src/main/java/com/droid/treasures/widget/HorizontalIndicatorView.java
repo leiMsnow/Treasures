@@ -6,6 +6,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -147,7 +149,7 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
 
     private void scrollToChild(int position, int positionOffset) {
         int scrollX = mContainer.getChildAt(position).getLeft() + positionOffset;
-        if (position > 0 || positionOffset > 0) {
+        if ((position > 0 && position < mItemCount) || positionOffset > 0) {
             scrollX -= mScreenWidth / 3;
         }
         if (scrollX != mLastScrollX) {
@@ -237,5 +239,29 @@ public class HorizontalIndicatorView extends HorizontalScrollView {
         ArgbEvaluator evaluator = new ArgbEvaluator();
         int changeColor = (int) evaluator.evaluate(mCurrentOffset, beforeColor, nextColor);
         view.setTextColor(changeColor);
+    }
+
+
+    private static final String INSTANCE_STATUS = "INSTANCE_STATUS";
+    private static final String STATE_POSITION = "STATE_POSITION";
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(INSTANCE_STATUS, super.onSaveInstanceState());
+        bundle.putInt(STATE_POSITION, mCurrentPosition);
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            mCurrentPosition = bundle.getInt(STATE_POSITION);
+            super.onRestoreInstanceState(bundle.getParcelable(INSTANCE_STATUS));
+            return;
+        }
+        super.onRestoreInstanceState(state);
     }
 }

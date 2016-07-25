@@ -2,18 +2,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.droid.treasures.widget.VerticalIndicatorView
+    <com.droid.treasures.widget.SortGroup
         android:id="@+id/viv_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="96dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
 
     <FrameLayout
         android:id="@+id/fl_container"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="#F0F0F0"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/viv_indicator"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/viv_indicator"
+        android:background="#F0F0F0"/>
 
 </RelativeLayout>

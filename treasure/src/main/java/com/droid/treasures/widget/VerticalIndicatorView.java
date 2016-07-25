@@ -96,13 +96,13 @@ public class VerticalIndicatorView extends ScrollView {
                     ViewGroup.LayoutParams.MATCH_PARENT, height);
 
             mContainer.addView(textView, layoutParams);
-
         }
+        changeSelectItemColor(0);
     }
 
     private void moveScrollY(int position) {
         int scrollY = mContainer.getChildAt(position).getTop();
-        if (position > 0) {
+        if (position > 0 && position < mItemCount) {
             scrollY -= mScreenHeight / 3;
         }
         if (scrollY != mLastScrollY) {
@@ -129,11 +129,6 @@ public class VerticalIndicatorView extends ScrollView {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             postInvalidate();
         }
-    }
-
-    @Override
-    public void fling(int velocityY) {
-        super.fling(velocityY / 5);
     }
 
     private void changeSelectItemColor(int position) {
