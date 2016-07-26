@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f0f0f0">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="#ffffff"
+        android:padding="8dp">
+
+        <com.droid.treasures.widget.CouponLayout
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="8dp"
+            android:layout_marginRight="32dp"
+            android:layout_toLeftOf="@+id/tv_time"
+            android:background="@color/colorPrimary"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全场礼券50元\n购买指定商品\n[满100可用]"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+
+        </com.droid.treasures.widget.CouponLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_marginLeft="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="07/30号"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

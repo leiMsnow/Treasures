@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.droid.ray.driver.R;
 import com.droid.ray.driver.adapter.DriverAdapter;
+import com.droid.ray.driver.fragment.CouponFragment;
 import com.droid.ray.driver.fragment.HorizontalFragment;
 import com.droid.ray.driver.fragment.SortFragment;
 import com.droid.ray.driver.fragment.VerticalFragment;
@@ -43,6 +44,7 @@ public class DriverActivity extends AppCompatActivity {
         mList.add(HorizontalFragment.class.getName());
         mList.add(VerticalFragment.class.getName());
         mList.add(SortFragment.class.getName());
+        mList.add(CouponFragment.class.getName());
     }
 
     private void initAdapter() {

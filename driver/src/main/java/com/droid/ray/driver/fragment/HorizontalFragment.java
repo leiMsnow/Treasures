@@ -30,7 +30,6 @@ public class HorizontalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_horizontal, container, false);
     }
 
@@ -42,7 +41,6 @@ public class HorizontalFragment extends Fragment {
         mIndicator = (HorizontalIndicatorView) view.findViewById(R.id.vp_indicator);
 
         mTitles = getArguments().getStringArray("titles");
-
         ArrayList<Fragment> fragments = new ArrayList<>();
         for (String title : mTitles) {
             Fragment fragment = ItemFragment.newInstance(title);
