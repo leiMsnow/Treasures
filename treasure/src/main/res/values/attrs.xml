@@ -7,7 +7,7 @@
     </declare-styleable>
 
     <declare-styleable name="CouponLayout">
-        <attr name="radius" format="integer"/>
+        <attr name="circle_count" format="integer"/>
         <attr name="gap" format="integer"/>
     </declare-styleable>
 

@@ -18,9 +18,7 @@ public class CouponLayout extends RelativeLayout {
 
     private float mGap;
     private float mRadius;
-    private float mFreeSpace;
     private int mCircleCount;
-
     private Paint mPaint;
 
     public CouponLayout(Context context) {
@@ -36,9 +34,8 @@ public class CouponLayout extends RelativeLayout {
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CouponLayout);
 
-        mGap = ta.getInteger(R.styleable.CouponLayout_gap, 12);
-        mRadius = ta.getInteger(R.styleable.CouponLayout_radius, 16);
-
+        mGap = ta.getInteger(R.styleable.CouponLayout_gap, 16);
+        mCircleCount = ta.getInteger(R.styleable.CouponLayout_circle_count, 6);
         ta.recycle();
 
         init();
@@ -55,19 +52,14 @@ public class CouponLayout extends RelativeLayout {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-
-        if (mFreeSpace == 0) {
-            mFreeSpace = (h - mGap) % (2 * mRadius + mGap);
-        }
-        mCircleCount = (int) ((h - mGap) / (2 * mRadius + mGap));
-
+        mRadius = (h - (mGap * (mCircleCount + 1))) / mCircleCount / 2;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for (int i = 0; i < mCircleCount; i++) {
-            float cy = mGap + mRadius + (mFreeSpace / 2) + ((mGap + mRadius * 2) * i);
+            float cy = mGap + mRadius + ((mGap + mRadius * 2) * i);
             canvas.drawCircle(getWidth(), cy, mRadius, mPaint);
         }
     }
