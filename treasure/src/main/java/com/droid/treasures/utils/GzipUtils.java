@@ -63,7 +63,7 @@ public class GzipUtils {
         String decompressed = null;
         try {
             compressed = Base64.decode(compressedStr, Base64.DEFAULT);
-//            print(compressed);
+            print(compressed);
             in = new ByteArrayInputStream(compressed);
             ginzip = new GZIPInputStream(in);
 
