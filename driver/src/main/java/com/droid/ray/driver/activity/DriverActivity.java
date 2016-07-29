@@ -14,6 +14,7 @@ import com.droid.ray.driver.fragment.CouponFragment;
 import com.droid.ray.driver.fragment.HorizontalFragment;
 import com.droid.ray.driver.fragment.SortFragment;
 import com.droid.ray.driver.fragment.VerticalFragment;
+import com.droid.treasures.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,11 @@ public class DriverActivity extends AppCompatActivity {
 
         addTestData();
         initAdapter();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void addTestData() {
@@ -61,6 +66,7 @@ public class DriverActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.rl_item:
+                    LogUtils.i(this.getClass().getSimpleName(), "fragment:" + v.getTag().toString());
                     Intent intent = new Intent(mContext, ShowActivity.class);
                     intent.putExtra("fragment", v.getTag().toString());
                     startActivity(intent);

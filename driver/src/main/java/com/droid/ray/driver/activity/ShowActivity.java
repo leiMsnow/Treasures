@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.droid.ray.driver.R;
+import com.droid.treasures.utils.LogUtils;
 
 public class ShowActivity extends AppCompatActivity {
 
@@ -21,6 +22,8 @@ public class ShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
+        LogUtils.d(this.getClass().getSimpleName(), "fragment:" + getIntent()
+                .getStringExtra("fragment"));
         try {
 
             Bundle bundle = new Bundle();
