@@ -7,9 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.droid.ray.driver.R;
+import com.droid.treasures.widget.NumberTextView;
 
 
 public class ItemFragment extends Fragment {
@@ -50,8 +50,13 @@ public class ItemFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = (TextView) view.findViewById(R.id.tv_content);
-        textView.setText(mText);
-
+        final NumberTextView textView = (NumberTextView) view.findViewById(R.id.tv_content);
+        textView.setNumber(35f);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setNumber(5.58f);
+            }
+        });
     }
 }

@@ -12,7 +12,7 @@
         android:scaleType="center"
         android:layout_centerInParent="true"/>
 
-    <TextView
+    <com.droid.treasures.widget.NumberTextView
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
