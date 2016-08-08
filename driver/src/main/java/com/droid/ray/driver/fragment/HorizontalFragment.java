@@ -25,7 +25,7 @@ public class HorizontalFragment extends Fragment {
     private HorizontalIndicatorView mIndicator;
     private ViewPagerAdapter mPagerAdapter;
 
-    private  String[] mTitles ;
+    private String[] mTitles;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

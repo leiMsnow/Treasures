@@ -11,12 +11,10 @@ import android.view.ViewGroup;
 import com.droid.ray.driver.R;
 import com.droid.treasures.widget.NumberTextView;
 
+import static com.droid.ray.driver.activity.ShowActivity.ARG_TITLE;
+
 
 public class ItemFragment extends Fragment {
-
-    public static final String ARG_TITLE = "title";
-
-    private String mText;
 
 
     public ItemFragment() {
@@ -32,19 +30,10 @@ public class ItemFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mText = getArguments().getString(ARG_TITLE);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_item, container, false);
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

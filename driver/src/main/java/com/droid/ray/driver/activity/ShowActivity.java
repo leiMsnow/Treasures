@@ -10,8 +10,10 @@ import com.droid.treasures.utils.LogUtils;
 public class ShowActivity extends AppCompatActivity {
 
 
+    public static final String ARG_TITLE = "title";
+
     private static String[] mTitles = new String[]{
-            "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
+            "全部", "Spannable", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
             "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
             "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他",
             "全部", "酒店", "儿童剧", "户外", "科学", "场馆", "夏令营", "境外游", "国内游", "手工", "其他"

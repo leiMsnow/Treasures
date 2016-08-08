@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.droid.ray.driver.fragment.ItemFragment;
-
 import java.util.ArrayList;
+
+import static com.droid.ray.driver.activity.ShowActivity.ARG_TITLE;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mFragments.get(position).getArguments().getString(ItemFragment.ARG_TITLE);
+        return mFragments.get(position).getArguments().getString(ARG_TITLE);
     }
 
     @Override

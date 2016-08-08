@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyView">
+        <attr name="src" format="integer"/>
+        <attr name="circle" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MyImageView">
+        <attr name="uri" format="integer"/>
+    </declare-styleable>
+</resources>

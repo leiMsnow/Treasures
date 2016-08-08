@@ -13,12 +13,12 @@ android {
     }
     buildTypes {
 
-        debug{
-            buildConfigField "boolean","LOG_DEBUG","true"
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
         }
 
         release {
-            buildConfigField "boolean","LOG_DEBUG","false"
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -27,10 +27,11 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
     compile project(':treasure')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'org.byteam.superadapter:superadapter:+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
+    testCompile 'junit:junit:4.12'
 }
