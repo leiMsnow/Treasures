@@ -7,4 +7,4 @@
   SortGroup 一个可以排序的顶部菜单。</br>
   CouponLayout 优惠券边缘效果的view。</br>
   CouponLayout 优惠券边缘效果的view。</br>
-  SpannableFragment Spannable的用法详解 </br>
+  SpannableFragment Spannable的用法详解。 </br>

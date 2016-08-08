@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
@@ -57,7 +58,7 @@ public class SpannableFragment extends Fragment {
         TextView tvSpannable = (TextView) view.findViewById(R.id.tv_spannable);
 
         tvSpannable.setText(getSpannable());
-//        tvSpannable.setHighlightColor(Color.TRANSPARENT);
+        tvSpannable.setHighlightColor(Color.TRANSPARENT);
         tvSpannable.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
@@ -65,7 +66,7 @@ public class SpannableFragment extends Fragment {
 
     private CharSequence getSpannable() {
         String text = "SpannableString可以设置\n背景色\n前景色\n相对大小\n绝对大小\n" +
-                "上下偏移\n粗体\n斜体\n下划线\n删除线\n点击监听\n超链接\n添加表情(图标)";
+                "上下偏移\n粗体\n斜体\n下划线\n删除线\n点击监听\n超链接\n添加表情(图标)\nflags";
         SpannableStringBuilder spannable = new SpannableStringBuilder(text);
 
         int startBG = text.indexOf("背景色");
@@ -124,13 +125,28 @@ public class SpannableFragment extends Fragment {
         spannable.setSpan(new ImageSpan(drawable),
                 startImage, startImage + 2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
+
+        String flagsTest = "flags";
+        int startFlags = text.indexOf(flagsTest);
+        spannable.setSpan(new ForegroundColorSpan(Color.RED), startFlags, startFlags + flagsTest.length(),
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannable.insert(startFlags, "开始前加入");
+//        spannable.insert(startFlags + flagsTest.length(), "结束后加入");
+
         return spannable;
+
     }
 
     class MyClickable extends ClickableSpan {
         @Override
         public void onClick(View widget) {
             ToastUtils.getInstance(getContext()).showToast(widget.getClass().getName());
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setColor(Color.DKGRAY);
+            ds.setUnderlineText(false);
         }
     }
 }
