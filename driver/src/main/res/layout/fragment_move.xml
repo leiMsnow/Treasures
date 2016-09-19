@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.droid.ray.driver.widget.MoveView
+        android:id="@+id/mv_view"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"/>
+
+
+    <!--<com.droid.ray.driver.widget.ScrollerView-->
+        <!--android:id="@+id/sv_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<Button-->
+        <!--android:id="@+id/tv_scroller"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="hello,scrollerView!"/>-->
+
+    <!--</com.droid.ray.driver.widget.ScrollerView>-->
+
+</LinearLayout>

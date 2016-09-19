@@ -12,13 +12,13 @@ import com.droid.ray.driver.R;
 import com.droid.ray.driver.adapter.DriverAdapter;
 import com.droid.ray.driver.fragment.CouponFragment;
 import com.droid.ray.driver.fragment.HorizontalFragment;
+import com.droid.ray.driver.fragment.MoveFragment;
 import com.droid.ray.driver.fragment.SortFragment;
 import com.droid.ray.driver.fragment.SpannableFragment;
+import com.droid.ray.driver.fragment.StepsFragment;
 import com.droid.ray.driver.fragment.VerticalFragment;
 import com.droid.treasures.utils.LogUtils;
 
-import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +54,8 @@ public class DriverActivity extends AppCompatActivity {
         mList.add(SortFragment.class.getName());
         mList.add(CouponFragment.class.getName());
         mList.add(SpannableFragment.class.getName());
+        mList.add(MoveFragment.class.getName());
+        mList.add(StepsFragment.class.getName());
     }
 
     private void initAdapter() {

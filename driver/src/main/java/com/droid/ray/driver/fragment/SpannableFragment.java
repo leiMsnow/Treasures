@@ -5,17 +5,19 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
+import android.text.style.QuoteSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
@@ -26,9 +28,12 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.droid.ray.driver.R;
+import com.droid.ray.driver.widget.LinkTouchMovementMethod;
+import com.droid.ray.driver.widget.TouchableSpan;
 import com.droid.treasures.utils.DensityUtils;
 import com.droid.treasures.utils.ToastUtils;
 
@@ -37,6 +42,8 @@ import static com.droid.ray.driver.activity.ShowActivity.ARG_TITLE;
 
 public class SpannableFragment extends Fragment {
 
+    String changedText = "";
+    boolean isChanged = false;
 
     public static SpannableFragment newInstance(String title) {
         SpannableFragment fragment = new SpannableFragment();
@@ -59,7 +66,13 @@ public class SpannableFragment extends Fragment {
 
         tvSpannable.setText(getSpannable());
         tvSpannable.setHighlightColor(Color.TRANSPARENT);
-        tvSpannable.setMovementMethod(LinkMovementMethod.getInstance());
+        tvSpannable.setMovementMethod(LinkTouchMovementMethod.getInstance());
+
+        EditText editText = (EditText) view.findViewById(R.id.et_spannable);
+        SpannableString spannableString = new SpannableString("SpannableString");
+        spannableString.setSpan(new ForegroundColorSpan(Color.BLUE), 2, 4,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        editText.setText(spannableString);
 
     }
 
@@ -72,6 +85,13 @@ public class SpannableFragment extends Fragment {
         int startBG = text.indexOf("背景色");
         spannable.setSpan(new BackgroundColorSpan(Color.RED), startBG, startBG + 3,
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        Parcel p = Parcel.obtain();
+        p.writeInt(Color.BLACK);
+        p.setDataPosition(0);
+        QuoteSpan qs = new QuoteSpan(p);
+        spannable.setSpan(qs, startBG, startBG + 3,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
         int startForeground = text.indexOf("前景色");
         spannable.setSpan(new ForegroundColorSpan(Color.BLUE), startForeground, startForeground + 3,
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE);
@@ -114,7 +134,12 @@ public class SpannableFragment extends Fragment {
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
         int startClick = text.indexOf("点击监听");
-        spannable.setSpan(new MyClickable(), startClick, startClick + 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannable.setSpan(new TouchableSpan(Color.DKGRAY, Color.GREEN) {
+            @Override
+            public void onClick(View widget) {
+                ToastUtils.getInstance(getContext()).showToast(widget.getClass().getName());
+            }
+        }, startClick, startClick + 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
         int startLink = text.indexOf("超链接");
         spannable.setSpan(new URLSpan("http://baidu.com"), startLink, startLink + 3, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
@@ -129,7 +154,7 @@ public class SpannableFragment extends Fragment {
         String flagsTest = "flags";
         int startFlags = text.indexOf(flagsTest);
         spannable.setSpan(new ForegroundColorSpan(Color.RED), startFlags, startFlags + flagsTest.length(),
-                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         spannable.insert(startFlags, "开始前加入");
 //        spannable.insert(startFlags + flagsTest.length(), "结束后加入");
 

@@ -6,9 +6,14 @@
         android:id="@+id/tv_spannable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="4dp"
-        android:gravity="center"
         android:layout_centerInParent="true"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:lineSpacingExtra="4dp"/>
+
+    <EditText
+        android:id="@+id/et_spannable"
+        android:layout_width="match_parent"
+        android:textSize="40sp"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>
