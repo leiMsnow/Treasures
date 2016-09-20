@@ -28,7 +28,6 @@ public class VerticalIndicatorView extends ScrollView {
     private int mSelectedTextColor = Color.RED;
     private int mDefaultBGColor = Color.WHITE;
     private int mSelectedBGColor = Color.parseColor("#F0F0F0");
-    private boolean isExpant = false;
     private int mItemCount = 0;
     private int mLastScrollY = 0;
 

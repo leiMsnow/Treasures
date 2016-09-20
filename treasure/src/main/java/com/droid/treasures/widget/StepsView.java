@@ -125,27 +125,27 @@ public class StepsView extends LinearLayout implements StepsViewIndicator.OnDraw
             this.step = stepNum;
         }
 
-        public int getStep() {
+        int getStep() {
             return step;
         }
 
-        public String getLabel() {
+        String getLabel() {
             return label;
         }
 
-        public float getStepPosition() {
+        float getStepPosition() {
             return stepPosition;
         }
 
-        public void setStepPosition(float stepPosition) {
+        void setStepPosition(float stepPosition) {
             this.stepPosition = stepPosition;
         }
 
-        public float getLabelPosition() {
+        float getLabelPosition() {
             return labelPosition;
         }
 
-        public void setLabelPosition(float labelPosition) {
+        void setLabelPosition(float labelPosition) {
             this.labelPosition = labelPosition;
         }
     }

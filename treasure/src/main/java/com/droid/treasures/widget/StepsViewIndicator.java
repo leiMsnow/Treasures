@@ -124,7 +124,7 @@ public class StepsViewIndicator extends View {
     }
 
     @Override
-    protected synchronized void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mDrawListener.onReady();
 
@@ -191,7 +191,6 @@ public class StepsViewIndicator extends View {
     }
 
     public interface OnDrawListener {
-
         void onReady();
     }
 }
