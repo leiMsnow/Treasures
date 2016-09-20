@@ -20,13 +20,13 @@ public class StepsViewIndicator extends View {
 
     private Paint paint = new Paint();
     private Paint selectedPaint = new Paint();
-    private int mNumOfStep = 2;
+    private int mNumOfStep = 0;
     private float mLineHeight;
     private float mThumbRadius;
     private float mCircleRadius;
     private float mPadding;
     private int mProgressColor = Color.YELLOW;
-    private int mBarColor = Color.BLACK;
+    private int mBarColor = Color.GRAY;
 
     private float mCenterY;
     private float mLeftX;
@@ -34,8 +34,7 @@ public class StepsViewIndicator extends View {
     private float mRightX;
     private float mRightY;
     private float mDelta;
-    private List<Float> mThumbContainerXPosition = new ArrayList<>();
-    private List<Float> mTextXPosition = new ArrayList<>();
+    private List<StepsView.StepEntity> mSteps = new ArrayList<>();
     private int mCompletedPosition;
     private OnDrawListener mDrawListener;
 
@@ -51,9 +50,7 @@ public class StepsViewIndicator extends View {
         super(context, attrs, defStyle);
         TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.StepsViewIndicator);
-        mNumOfStep = a.getInt(R.styleable.StepsViewIndicator_numOfSteps, 0);
         a.recycle();
-
         init();
     }
 
@@ -64,8 +61,9 @@ public class StepsViewIndicator extends View {
         mPadding = 0.5f * THUMB_SIZE;
     }
 
-    public void setStepSize(int size) {
-        mNumOfStep = size + 1;
+    public void setSteps(List<StepsView.StepEntity> steps) {
+        mSteps = steps;
+        mNumOfStep = steps.size();
         invalidate();
     }
 
@@ -73,8 +71,8 @@ public class StepsViewIndicator extends View {
         mDrawListener = drawListener;
     }
 
-    public List<Float> getTextXPosition() {
-        return mTextXPosition;
+    public List<StepsView.StepEntity> getTextXPosition() {
+        return mSteps;
     }
 
     @Override
@@ -86,14 +84,17 @@ public class StepsViewIndicator extends View {
         mLeftY = mCenterY - (mLineHeight / 2);
         mRightX = getWidth() - mPadding;
         mRightY = 0.5f * (getHeight() + mLineHeight);
-        mDelta = (mRightX - mLeftX) / (mNumOfStep - 1);
-        mThumbContainerXPosition.add(mLeftX);
-        mTextXPosition.add(mDelta / 2);
-        for (int i = 1; i < mNumOfStep - 1; i++) {
-            mThumbContainerXPosition.add(mLeftX + (i * mDelta));
-            mTextXPosition.add((mDelta * i + (mDelta / 2)));
+        mDelta = mRightX / (mNumOfStep - 1);
+        for (int i = 0; i < mNumOfStep; i++) {
+            if (i == mNumOfStep - 1) {
+                mSteps.get(i).setStepPosition(mRightX);
+            } else if (i == 0) {
+                mSteps.get(i).setStepPosition(mLeftX);
+            } else {
+                mSteps.get(i).setStepPosition(mDelta * i);
+            }
+            mSteps.get(i).setLabelPosition((i * mDelta) - mDelta / 2);
         }
-        mThumbContainerXPosition.add(mRightX);
         mDrawListener.onReady();
     }
 
@@ -114,7 +115,6 @@ public class StepsViewIndicator extends View {
         mCompletedPosition = position;
     }
 
-
     public void setProgressColor(int progressColor) {
         mProgressColor = progressColor;
     }
@@ -127,54 +127,60 @@ public class StepsViewIndicator extends View {
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mDrawListener.onReady();
+
         paint.setAntiAlias(true);
         paint.setColor(mBarColor);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(2);
 
         selectedPaint.setAntiAlias(true);
         selectedPaint.setColor(mProgressColor);
-        selectedPaint.setStyle(Paint.Style.STROKE);
+        selectedPaint.setStyle(Paint.Style.FILL);
         selectedPaint.setStrokeWidth(2);
 
-        // Draw rest of the circle'Bounds
-        for (int i = 0; i < mThumbContainerXPosition.size(); i++) {
-            canvas.drawCircle(mThumbContainerXPosition.get(i), mCenterY, mCircleRadius,
-                    (i <= mCompletedPosition) ? selectedPaint : paint);
+        drawCircle(canvas);
+        drawSelectLine(canvas);
+        drawSelectCircle(canvas);
+    }
+
+    public void drawCircle(Canvas canvas) {
+        for (int i = 0; i < mNumOfStep; i++) {
+            canvas.drawCircle(mSteps.get(i).getStepPosition(), mCenterY, mCircleRadius, paint);
         }
+        canvas.drawRect(mSteps.get(0).getStepPosition(), mLeftY,
+                mSteps.get(mSteps.size() - 1).getStepPosition(), mRightY, paint);
+    }
 
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawRect(mThumbContainerXPosition.get(0), mLeftY,
-                mThumbContainerXPosition.get(mThumbContainerXPosition.size() - 1), mRightY,
-                paint);
-
-        selectedPaint.setStyle(Paint.Style.FILL);
-        for (int i = 0; i < mThumbContainerXPosition.size() - 1; i++) {
-            if (i < mCompletedPosition) {
-                final float pos = mThumbContainerXPosition.get(i);
-                final float selectPos = mThumbContainerXPosition.get(i + 1);
-                canvas.drawRect(pos, mLeftY, selectPos, mRightY, selectedPaint);
-            } else if (i == mCompletedPosition) {
-                final float pos = mThumbContainerXPosition.get(i);
-                final float selectPos = mThumbContainerXPosition.get(i + 1) -
-                        mThumbContainerXPosition.get(1) / 2;
-                canvas.drawRect(pos, mLeftY, selectPos, mRightY, selectedPaint);
+    public void drawSelectLine(Canvas canvas) {
+        for (int i = 1; i < mNumOfStep; i++) {
+            int before = mSteps.get(i - 1).getStep();
+            if (mCompletedPosition > 0 && mCompletedPosition <= mSteps.get(i).getStep()) {
+                float currentDelta = (mDelta / (mSteps.get(i).getStep() - before));
+                float currentStep = (mCompletedPosition - before) * currentDelta + (mDelta * (i - 1));
+                canvas.drawRect(mLeftX, mLeftY, currentStep, mRightY, selectedPaint);
+                break;
             }
-        }
-
-        // Draw rest of circle
-        for (int i = 0; i < mThumbContainerXPosition.size(); i++) {
-            final float pos = mThumbContainerXPosition.get(i);
-            canvas.drawCircle(pos, mCenterY, mCircleRadius,
-                    (i <= mCompletedPosition) ? selectedPaint : paint);
-
-            if (i == mCompletedPosition) {
-                selectedPaint.setColor(getColorWithAlpha(mProgressColor, 0.2f));
-                canvas.drawCircle(pos, mCenterY, mCircleRadius * 1.8f, selectedPaint);
-            }
-
         }
     }
+
+    private void drawSelectCircle(Canvas canvas) {
+        int lastCircle = -1;
+        selectedPaint.setColor(mProgressColor);
+        for (int i = 0; i < mNumOfStep; i++) {
+            float pos = mSteps.get(i).getStepPosition();
+            if (mCompletedPosition == 0) continue;
+            if (mCompletedPosition >= mSteps.get(i).getStep()) {
+                lastCircle = i;
+                canvas.drawCircle(pos, mCenterY, mCircleRadius, selectedPaint);
+            }
+        }
+        if (lastCircle >= 1) {
+            selectedPaint.setColor(getColorWithAlpha(mProgressColor, 0.2f));
+            canvas.drawCircle(mSteps.get(lastCircle).getStepPosition(),
+                    mCenterY, mCircleRadius * 1.8f, selectedPaint);
+        }
+    }
+
 
     public static int getColorWithAlpha(int color, float ratio) {
         int alpha = Math.round(Color.alpha(color) * ratio);

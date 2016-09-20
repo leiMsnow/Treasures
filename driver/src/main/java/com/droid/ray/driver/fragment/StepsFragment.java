@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.droid.ray.driver.R;
 import com.droid.treasures.widget.StepsView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class StepsFragment extends Fragment {
 
@@ -25,16 +28,19 @@ public class StepsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final String[] labels = {"预定满三件\n$99.00", "预定满十件\n$88.00", "预定满二十件\n$77.00"};
+        final String[] labels = {"拼团满1件\n$99.00", "拼团满10件\n$88.00", "拼团满20件\n$77.00"};
+        List<StepsView.StepEntity> stepEntities = new ArrayList<>();
+        stepEntities.add(new StepsView.StepEntity(labels[0], 1));
+        stepEntities.add(new StepsView.StepEntity(labels[1], 10));
+        stepEntities.add(new StepsView.StepEntity(labels[2], 20));
 
         mStepsView = (StepsView) view.findViewById(R.id.stepsView);
 
-        mStepsView.setCompletedPosition(2).setLabels(labels)
+        mStepsView.setCompletedPosition(19).setSteps(stepEntities)
                 .setBarColorIndicator(
                         getContext().getResources().getColor(android.R.color.darker_gray))
                 .setProgressColorIndicator(getContext().getResources().getColor(android.R.color.holo_orange_dark))
                 .setLabelColorIndicator(getContext().getResources().getColor(android.R.color.holo_orange_dark))
                 .drawView();
     }
-
 }
